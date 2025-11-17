@@ -27,5 +27,10 @@ public class UsuarioController {
         return usuarioService.listarTodos();
     }
 
+    @DeleteMapping("/{id}")
+    public void eliminarUsuario(@PathVariable Integer id) {
+        usuarioService.eliminarUsuario(id);
+    }
+
 
 }
