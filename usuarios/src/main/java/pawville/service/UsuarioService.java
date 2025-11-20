@@ -13,9 +13,10 @@ import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class UsuarioService{
+public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
+
     public List<Usuario> listarTodos() {
         return usuarioRepository.findAll();
     }
@@ -28,13 +29,22 @@ public class UsuarioService{
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuario no encontrado");
         }
     }
+
     public Usuario crearUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
+    }
+
+    public Usuario login(String correo, String contrasena) {
+        Optional<Usuario> usuario = usuarioRepository.findByCorreo(correo);
+
+        if (usuario.isPresent() && usuario.get().getContrasena().equals(contrasena)) {
+            return usuario.get();
+        } else {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Credenciales inválidas");
+        }
     }
 
     public void eliminarUsuario(Integer id) {
         usuarioRepository.deleteById(Long.valueOf(id));
     }
-
-
 }

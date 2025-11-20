@@ -1,7 +1,10 @@
 package pawville.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+import pawville.dto.LoginRequest;
 import pawville.model.Usuario;
 import pawville.service.UsuarioService;
 
@@ -17,9 +20,9 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @PostMapping
-    public void crearUsuario(@RequestBody Usuario usuario) {
-        usuarioService.crearUsuario(usuario);
+    @PostMapping("/registro")
+    public Usuario crearUsuario(@RequestBody Usuario usuario) {
+        return usuarioService.crearUsuario(usuario);
     }
 
     @GetMapping
@@ -27,10 +30,13 @@ public class UsuarioController {
         return usuarioService.listarTodos();
     }
 
+    @PostMapping("/login")
+    public Usuario login(@RequestBody LoginRequest loginRequest) {
+        return usuarioService.login(loginRequest.getCorreo(), loginRequest.getContrasena());
+    }
+
     @DeleteMapping("/{id}")
     public void eliminarUsuario(@PathVariable Integer id) {
         usuarioService.eliminarUsuario(id);
     }
-
-
 }
