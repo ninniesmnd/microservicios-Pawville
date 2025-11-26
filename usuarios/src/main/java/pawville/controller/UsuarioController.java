@@ -1,17 +1,16 @@
 package pawville.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import pawville.dto.LoginRequest;
 import pawville.model.Usuario;
 import pawville.service.UsuarioService;
 
 import java.util.List;
 
+
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/api/usuarios")
 public class UsuarioController {
     private final UsuarioService usuarioService;
 
@@ -20,14 +19,19 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    @PostMapping("/registro")
+    @GetMapping
+    public List<Usuario> listarUsuarios() {
+        return usuarioService.listarUsuarios();
+    }
+
+    @PostMapping
     public Usuario crearUsuario(@RequestBody Usuario usuario) {
         return usuarioService.crearUsuario(usuario);
     }
 
-    @GetMapping
-    public List<Usuario> listarUsuarios() {
-        return usuarioService.listarTodos();
+    @PutMapping("/actualizar/{id}")
+    public Usuario actualizarUsuario(@PathVariable Integer id, @RequestBody Usuario usuario) {
+        return usuarioService.actualizarUsuario(id, usuario);
     }
 
     @PostMapping("/login")
@@ -35,7 +39,7 @@ public class UsuarioController {
         return usuarioService.login(loginRequest.getCorreo(), loginRequest.getContrasena());
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/eliminar/{id}")
     public void eliminarUsuario(@PathVariable Integer id) {
         usuarioService.eliminarUsuario(id);
     }

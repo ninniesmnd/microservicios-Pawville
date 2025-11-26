@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="usuario")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,5 +21,4 @@ public class Usuario {
     private String correo;
     @Column(nullable = false)
     private String contrasena;
-
 }
