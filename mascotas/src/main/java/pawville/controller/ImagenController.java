@@ -39,7 +39,7 @@ public class ImagenController {
             }
 
             //nombre unico para la imagen
-            String extension = getExtension(archivo.getOriginalFilename());
+            String extension = obtenerExtension(archivo.getOriginalFilename());
             String nombreArchivo = UUID.randomUUID().toString() + extension;
 
             // guardar archvo
@@ -56,14 +56,14 @@ public class ImagenController {
         }
     }
 
-    @GetMapping("/{filename:.+}")
-    public ResponseEntity<Resource> obtenerImagen(@PathVariable String filename) {
+    @GetMapping("/{nombrearchivo:.+}")
+    public ResponseEntity<Resource> obtenerImagen(@PathVariable String nombrearchivo) {
         try {
-            Path archivo = rootLocation.resolve(filename);
+            Path archivo = rootLocation.resolve(nombrearchivo);
             Resource recurso = new UrlResource(archivo.toUri());
 
             if (recurso.exists() && recurso.isReadable()) {
-                // Determinar el tipo de contenido
+                // ver el tipo de contenido
                 String contentType = Files.probeContentType(archivo);
                 if (contentType == null) {
                     contentType = "application/octet-stream";
@@ -82,10 +82,10 @@ public class ImagenController {
         }
     }
 
-    // Método auxiliar para obtener la extensión del archivo
-    private String getExtension(String filename) {
-        if (filename == null) return "";
-        int lastDot = filename.lastIndexOf('.');
-        return (lastDot == -1) ? "" : filename.substring(lastDot);
+
+    private String obtenerExtension(String nombrearchivo) {
+        if (nombrearchivo == null) return "";
+        int ultimoPunto = nombrearchivo.lastIndexOf('.');
+        return (ultimoPunto == -1) ? "" : nombrearchivo.substring(ultimoPunto);
     }
 }
