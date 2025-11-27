@@ -10,6 +10,7 @@
 	<modules>
 		<module>usuarios</module>
         <module>mascotas</module>
+        <module>donaciones</module>
     </modules>
 
 
