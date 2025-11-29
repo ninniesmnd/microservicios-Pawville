@@ -19,12 +19,12 @@ public class Ejercicio {
     @Column(nullable = false, length = 100)
     private String nombre;
 
-    @Column(columnDefinition = "TEXT") // Permite textos largos
+    @Column(length = 500)
     private String descripcion;
 
-    // Duración en minutos
+    @Column(nullable = false)
     private Integer duracionDefault;
 
-    // Calorías quemadas por defecto por unidad de tiempo/duración
+    @Column(nullable = false)
     private Integer caloriasDefault;
 }
