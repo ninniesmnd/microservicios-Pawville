@@ -12,4 +12,5 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
     List<Mascota> findByLocalidad(String localidad);
     List<Mascota> findByGenero(String genero);
     List<Mascota> findByTamano(String tamano);
+    List<Mascota> findByIdIn(List<Long> ids);
 }

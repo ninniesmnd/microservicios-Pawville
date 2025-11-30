@@ -82,5 +82,7 @@ public class MascotaService {
         return mascotaRepository.findByTamano(tamano);
     }
 
-    // ELIMINADO: obtenerImagenMascota (ya que su lógica está en ImagenController)
+    public List<Mascota> obtenerMascotasPorIds(List<Long> ids) {
+        return mascotaRepository.findByIdIn(ids);
+    }
 }
