@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController // 1. Indica que esta clase es un controlador REST
 @RequestMapping("/api/donaciones")
-
+@CrossOrigin(origins ="*")
 public class DonacionController {
     @Autowired
     private DonacionService donacionService;
@@ -34,9 +34,7 @@ public class DonacionController {
     @GetMapping("/{id}")
     public ResponseEntity<Donacion> obtenerDonacionPorId(@PathVariable Long id) {
         return donacionService.obtenerPorId(id)
-
                 .map(donacion -> new ResponseEntity<>(donacion, HttpStatus.OK))
-
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
@@ -54,7 +52,6 @@ public class DonacionController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Donacion> eliminarDonacionPorId(@PathVariable Long id) {
         donacionService.eliminarDonacion(id);
-
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
