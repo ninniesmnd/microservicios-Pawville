@@ -11,6 +11,7 @@
 		<module>usuarios</module>
         <module>mascotas</module>
         <module>donaciones</module>
+        <module>adopcion</module>
     </modules>
 
 
