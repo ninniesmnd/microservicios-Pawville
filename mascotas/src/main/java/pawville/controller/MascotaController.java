@@ -106,4 +106,14 @@ public class MascotaController {
         List<Mascota> mascotas = mascotaService.obtenerMascotasPorTamano(tamano);
         return ResponseEntity.ok(mascotas);
     }
+
+    //cuerpo json con la lista de ids [1, 5, 8, 12]
+    @PostMapping("/destacadas/lista")
+    public ResponseEntity<List<Mascota>> obtenerMascotasPorListaIds(@RequestBody List<Long> ids) {
+        if (ids == null || ids.isEmpty()) {
+            return ResponseEntity.badRequest().body(List.of());
+        }
+        List<Mascota> mascotas = mascotaService.obtenerMascotasPorIds(ids);
+        return ResponseEntity.ok(mascotas);
+    }
 }
