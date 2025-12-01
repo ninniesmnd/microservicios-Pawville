@@ -33,6 +33,12 @@ public class AdopcionController {
     public Optional<Adopcion> obtenerPorIdMascota(@PathVariable Long id) {
         return adopcionService.buscarSolicitudPorIdMascota(id);
     }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<List<Adopcion>> obtenerPorEmail(@PathVariable String email) {
+        List<Adopcion> solicitudes = adopcionService.buscarSolicitudesPorEmail(email);
+        return ResponseEntity.ok(solicitudes);
+    }
     
     @PostMapping
     public ResponseEntity<Adopcion> crearSolicitud(@RequestBody Adopcion solicitud) {

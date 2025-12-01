@@ -25,6 +25,10 @@ public class AdopcionService {
     public Optional<Adopcion> buscarSolicitudPorIdMascota(Long id) {
         return adopcionRepository.findByIdMascota(id);
     }
+
+    public List<Adopcion> buscarSolicitudesPorEmail(String email) {
+        return adopcionRepository.findByEmail(email);
+    }
     public Adopcion crearSolicitud(Adopcion solicitud) {
         return adopcionRepository.save(solicitud);
     }
